@@ -1,5 +1,6 @@
 package com.inventario.iniciador.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,9 @@ public class DatosController {
 
     @GetMapping
     public String listarDatos(Model model) {
-        model.addAttribute("datos", datosServicio.listar());
-        return "listaDatos";
+        List<Datos> listaDatos = datosServicio.listar(); // Verifica que este método no retorne null
+        model.addAttribute("datos", listaDatos);
+        return "datos";
     }
 
     @GetMapping("/nuevo")

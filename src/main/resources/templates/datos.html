@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Datos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+    <nav class="w-full bg-cyan-700 p-4 shadow-xl">
+        <div class="flex items-center justify-center text-2xl">
+            <a th:href="@{/}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">INICIO</a>
+            <a th:href="@{/administradores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">ADMIN</a>
+            <a th:href="@{/sensores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">SENSORES</a>
+            <a th:href="@{/datos}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">DATOS</a>
+        </div>
+    </nav>
+
+    <!-- Título -->
+    <div class="container mx-auto mt-6">
+        <h1 class="text-3xl font-semibold text-gray-800">Gestión de Datos</h1>
+    </div>
+
+    <!-- Tabla de Datos -->
+    <div class="container mx-auto mt-6 bg-white p-6 rounded-lg shadow-md">
+        <table class="table-auto w-full bg-white shadow-md rounded-lg">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2">ID</th>
+                    <th class="px-4 py-2">Fecha Registro</th>
+                    <th class="px-4 py-2">Contaminación</th>
+                    <th class="px-4 py-2">Latitud</th>
+                    <th class="px-4 py-2">Longitud</th>
+                    <th class="px-4 py-2">Sensor</th>
+                    <th class="px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dato : ${datos}">
+                    <td class="border px-4 py-2" th:text="${dato.id}"></td>
+                    <td class="border px-4 py-2" th:text="${dato.fechaRegistro}"></td>
+                    <td class="border px-4 py-2" th:text="${dato.contaminación}"></td>
+                    <td class="border px-4 py-2" th:text="${dato.latitud}"></td>
+                    <td class="border px-4 py-2" th:text="${dato.longitud}"></td>
+                    <td class="border px-4 py-2" th:text="${dato.sensor.modelo}"></td>
+                    <td class="border px-4 py-2">
+                        <a th:href="@{/datos/{id}/ver(id=${dato.id})}" 
+                           class="text-blue-500 hover:underline mx-2">Leer</a>
+                        <a th:href="@{/datos/{id}/editar(id=${dato.id})}" 
+                           class="text-yellow-500 hover:underline mx-2">Editar</a>
+                        <a th:href="@{/datos/{id}/eliminar(id=${dato.id})}" 
+                           class="text-red-500 hover:underline mx-2" 
+                           onclick="return confirm('¿Estás seguro de eliminar este dato?')">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="mt-4 bg-green-500 text-white px-4 py-2 rounded" 
+                th:onclick="|window.location='/datos/agregar'|">
+            Agregar Nuevo Dato
+        </button>
+    </div>
+
+</body>
+</html>

@@ -21,7 +21,7 @@ public class AdministradorController {
     @GetMapping
     public String listarAdministradores(Model model) {
         model.addAttribute("administradores", adminServicio.listar());
-        return "listaAdministradores";
+        return "administradores";
     }
 
     @GetMapping("/nuevo")
