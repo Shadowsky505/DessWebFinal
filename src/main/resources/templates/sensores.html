@@ -39,7 +39,7 @@
                     <td class="border px-4 py-2" th:text="${sensor.id}"></td>
                     <td class="border px-4 py-2" th:text="${sensor.modelo}"></td>
                     <td class="border px-4 py-2" th:text="${sensor.ciudad}"></td>
-                    <td class="border px-4 py-2" th:text="${#dates.format(sensor.fechaRegistro, 'yyyy-MM-dd')}"></td>
+                    <td class="border px-4 py-2" th:text="${sensor.fechaRegistro}"></td>
                     <td class="border px-4 py-2">
                         <a th:href="@{/sensores/{id}/ver(id=${sensor.id})}" 
                            class="text-blue-500 hover:underline mx-2">Leer</a>

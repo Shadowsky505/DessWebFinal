@@ -2,6 +2,8 @@ package com.inventario.iniciador.models;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -12,11 +14,12 @@ public class Datos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="fechaRegsitro")
+	@CreationTimestamp
+	@Column(name="fechaRegsitro", updatable = false)
 	private LocalDateTime fechaRegistro;
 	
 	@Column(name="nivelContaminación")
-	private Double Contaminación;
+	private Integer Contaminación;
 	
 	@Column(name="latitud")
 	private Double latitud;
@@ -24,14 +27,15 @@ public class Datos {
 	@Column(name="longitud")
 	private Double longitud;
 	
-	@OneToOne
+	@ManyToOne
+    @JoinColumn(name = "sensor_id")
 	private Sensores sensor;
 	
 	public Datos() {
 		
 	}
 
-	public Datos(int id, LocalDateTime fechaRegistro, Double contaminación, Double latitud, Double longitud, Sensores sensor) {
+	public Datos(int id, LocalDateTime fechaRegistro, Integer contaminación, Double latitud, Double longitud, Sensores sensor) {
 		super();
 		this.id = id;
 		this.fechaRegistro = fechaRegistro;
@@ -57,11 +61,11 @@ public class Datos {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public Double getContaminación() {
+	public Integer getContaminación() {
 		return Contaminación;
 	}
 
-	public void setContaminación(Double contaminación) {
+	public void setContaminación(Integer contaminación) {
 		Contaminación = contaminación;
 	}
 

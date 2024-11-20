@@ -1,7 +1,10 @@
 package com.inventario.iniciador.models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.*;
 
@@ -18,8 +21,9 @@ public class Sensores{
 	@Column(name="ciudad")
 	private String ciudad;
 	
-	@Column(name="fechaRegistro")
-	private Date fechaRegistro;
+	@CreationTimestamp
+    @Column(name = "fecha_registro", updatable = false)
+    private LocalDateTime fechaRegistro;
 	
 	@OneToMany
 	private List<Datos> datos;
@@ -28,7 +32,7 @@ public class Sensores{
 		
 	}
 
-	public Sensores(int id, String modelo, String ciudad, Date fechaRegistro, List<Datos> datos) {
+	public Sensores(int id, String modelo, String ciudad, LocalDateTime fechaRegistro, List<Datos> datos) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
@@ -61,11 +65,11 @@ public class Sensores{
 		this.ciudad = ciudad;
 	}
 
-	public Date getFechaRegistro() {
+	public LocalDateTime getFechaRegistro() {
 		return fechaRegistro;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 
