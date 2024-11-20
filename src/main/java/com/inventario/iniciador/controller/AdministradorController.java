@@ -24,10 +24,10 @@ public class AdministradorController {
         return "administradores";
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/agregar")
     public String agregarAdministrador(Model model) {
         model.addAttribute("administrador", new Administradores());
-        return "nuevoAdministrador";
+        return "addAdministradores";
     }
 
     @PostMapping("/guardar")

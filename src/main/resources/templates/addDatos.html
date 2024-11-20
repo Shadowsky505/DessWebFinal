@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Datos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+    <nav class="w-full bg-cyan-700 p-4 shadow-xl">
+        <div class="flex items-center justify-center text-2xl">
+            <a th:href="@{/}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">INICIO</a>
+            <a th:href="@{/administradores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">ADMIN</a>
+            <a th:href="@{/sensores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">SENSORES</a>
+            <a th:href="@{/datos}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">DATOS</a>
+        </div>
+    </nav>
+
+    <!-- Formulario de agregar Datos -->
+    <div class="container mx-auto p-6 mt-6 w-full max-w-lg bg-white shadow-lg rounded-lg">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Agregar Datos</h1>
+        
+        <form action="/datos/agregar" method="POST">
+            <!-- Contaminación -->
+            <div class="mb-4">
+                <label for="contaminacion" class="block text-sm font-medium text-gray-700">Contaminación</label>
+                <input type="number" id="contaminacion" name="contaminacion" class="w-full px-4 py-2 border border-gray-300 rounded-md" step="0.01" required>
+            </div>
+
+            <!-- Latitud -->
+            <div class="mb-4">
+                <label for="latitud" class="block text-sm font-medium text-gray-700">Latitud</label>
+                <input type="number" id="latitud" name="latitud" class="w-full px-4 py-2 border border-gray-300 rounded-md" step="0.000001" required>
+            </div>
+
+            <!-- Longitud -->
+            <div class="mb-4">
+                <label for="longitud" class="block text-sm font-medium text-gray-700">Longitud</label>
+                <input type="number" id="longitud" name="longitud" class="w-full px-4 py-2 border border-gray-300 rounded-md" step="0.000001" required>
+            </div>
+
+            <!-- Sensor (Dynamic Select) -->
+            <div class="mb-4">
+                <label for="sensor" class="block text-sm font-medium text-gray-700">Sensor</label>
+                <select id="sensor" name="sensor" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                    <option value="">Seleccione un sensor</option>
+                    <!-- Llenar el select con los sensores disponibles -->
+                    <!-- Usamos Thymeleaf para iterar sobre los sensores -->
+                    <th:block th:each="sensor : ${sensores}">
+                        <option th:value="${sensor.id}" th:text="${sensor.modelo}">Sensor</option>
+                    </th:block>
+                </select>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Agregar Datos</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

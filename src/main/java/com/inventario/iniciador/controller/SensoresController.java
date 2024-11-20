@@ -24,10 +24,10 @@ public class SensoresController {
         return "sensores";
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/agregar")
     public String agregarSensor(Model model) {
         model.addAttribute("sensor", new Sensores());
-        return "nuevoSensor";
+        return "addSensores";
     }
 
     @PostMapping("/guardar")

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.inventario.iniciador.interfaceService.IDatosServicio;
+import com.inventario.iniciador.interfaceService.ISensoresServicio;
 import com.inventario.iniciador.models.Datos;
+import com.inventario.iniciador.models.Sensores;
 
 @Controller
 @RequestMapping("/datos")
@@ -19,6 +21,9 @@ public class DatosController {
     @Autowired
     private IDatosServicio datosServicio;
 
+    @Autowired
+    private ISensoresServicio sensoresServicio;
+
     @GetMapping
     public String listarDatos(Model model) {
         List<Datos> listaDatos = datosServicio.listar(); // Verifica que este método no retorne null
@@ -26,10 +31,12 @@ public class DatosController {
         return "datos";
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/agregar")
     public String agregarDato(Model model) {
+        List<Sensores> sensores = sensoresServicio.listar();
+        model.addAttribute("sensores", sensores);
         model.addAttribute("dato", new Datos());
-        return "nuevoDato";
+        return "addDatos";
     }
 
     @PostMapping("/guardar")
