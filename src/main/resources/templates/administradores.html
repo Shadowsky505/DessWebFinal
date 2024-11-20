@@ -39,11 +39,9 @@
                     <td class="border px-4 py-2" th:text="${admin.nombre}"></td>
                     <td class="border px-4 py-2" th:text="${admin.correo}"></td>
                     <td class="border px-4 py-2">
-                        <a th:href="@{/administradores/{id}/ver(id=${admin.id})}" 
-                           class="text-blue-500 hover:underline mx-2">Leer</a>
-                        <a th:href="@{/administradores/{id}/editar(id=${admin.id})}" 
+                        <a th:href="@{/administradores/editar/{id}(id=${admin.id})}" 
                            class="text-yellow-500 hover:underline mx-2">Editar</a>
-                        <a th:href="@{/administradores/{id}/eliminar(id=${admin.id})}" 
+                        <a th:href="@{/administradores/eliminar/{id}(id=${admin.id})}" 
                            class="text-red-500 hover:underline mx-2" 
                            onclick="return confirm('¿Estás seguro de eliminar este administrador?')">Eliminar</a>
                     </td>

@@ -37,7 +37,9 @@ public class AdministradorServicio implements IAdministradorServicio{
 
 	@Override
 	public void borrar(int id) {
-		// TODO Auto-generated method stub
+
+		repo.deleteById(id);
+
 
 	}
 

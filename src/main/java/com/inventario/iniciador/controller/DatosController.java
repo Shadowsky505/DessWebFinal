@@ -47,15 +47,16 @@ public class DatosController {
     }
 
     @GetMapping("/editar/{id}")
-    public String editarDato(@PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
-        Optional<Datos> datoOpt = datosServicio.listarId(id);
-        if (datoOpt.isPresent()) {
-            model.addAttribute("dato", datoOpt.get());
-            return "editarDato";
+    public String editarDatos(@PathVariable int id, Model model) {
+        Optional<Datos> datos = datosServicio.listarId(id);
+        if (datos.isPresent()) {
+            model.addAttribute("dato", datos.get()); // Nota: Usar "dato" para coincidir con el HTML
+            model.addAttribute("sensores", sensoresServicio.listar()); // Lista para el select
+            return "editarDatos";
         }
-        redirectAttributes.addFlashAttribute("error", "Dato no encontrado.");
         return "redirect:/datos";
     }
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarDato(@PathVariable int id, RedirectAttributes redirectAttributes) {

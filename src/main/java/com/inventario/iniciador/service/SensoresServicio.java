@@ -35,8 +35,7 @@ public class SensoresServicio implements ISensoresServicio{
 	}
 
 	@Override
-	public void borrar(int id) {
-		
-
-	}
+    public void borrar(int id) {
+        repo.deleteById(id);
+    }
 }

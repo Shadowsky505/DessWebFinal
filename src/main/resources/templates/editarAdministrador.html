@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Administrador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+    <h1 class="text-3xl font-bold mt-10">Editar Administrador</h1>
+
+    <form th:action="@{/administradores/guardar}" th:object="${administrador}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6 w-full max-w-lg">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre">Nombre</label>
+            <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="correo">Correo</label>
+            <input type="email" id="correo" th:field="*{correo}" placeholder="Correo Electrónico" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" th:field="*{contrasena}" placeholder="Contraseña" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Guardar
+        </button>
+    </form>
+
+</body>
+</html>

@@ -45,11 +45,9 @@
                     <td class="border px-4 py-2" th:text="${dato.longitud}"></td>
                     <td class="border px-4 py-2" th:text="${dato.sensor.modelo}"></td>
                     <td class="border px-4 py-2">
-                        <a th:href="@{/datos/{id}/ver(id=${dato.id})}" 
-                           class="text-blue-500 hover:underline mx-2">Leer</a>
-                        <a th:href="@{/datos/{id}/editar(id=${dato.id})}" 
+                        <a th:href="@{/datos/editar/{id}(id=${dato.id})}" 
                            class="text-yellow-500 hover:underline mx-2">Editar</a>
-                        <a th:href="@{/datos/{id}/eliminar(id=${dato.id})}" 
+                        <a th:href="@{/datos/eliminar/{id}(id=${dato.id})}" 
                            class="text-red-500 hover:underline mx-2" 
                            onclick="return confirm('¿Estás seguro de eliminar este dato?')">Eliminar</a>
                     </td>

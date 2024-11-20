@@ -38,7 +38,8 @@ public class DatosServicio implements IDatosServicio{
 
 	@Override
 	public void borrar(int id) {
-		// TODO Auto-generated method stub
+
+		repo.deleteById(id);
 
 	}
 
