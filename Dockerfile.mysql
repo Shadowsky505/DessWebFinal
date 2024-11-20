@@ -1,0 +1,9 @@
+# Usar la imagen oficial de MySQL
+FROM mysql:8.0
+
+# Configurar variables de entorno para MySQL
+ENV MYSQL_ROOT_PASSWORD=lab12
+ENV MYSQL_DATABASE=lab12
+
+# Exponer el puerto de MySQL
+EXPOSE 3306
