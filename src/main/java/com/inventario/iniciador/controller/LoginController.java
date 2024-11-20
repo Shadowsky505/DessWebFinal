@@ -1,54 +1,45 @@
 package com.inventario.iniciador.controller;
 
+import com.inventario.iniciador.models.Administradores;
+import com.inventario.iniciador.models.LoginRequest;
+import com.inventario.iniciador.service.AdministradorServicio;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inventario.iniciador.interfaceService.IAdministradorServicio;
-import com.inventario.iniciador.models.Administradores;
 
-@RestController
-@RequestMapping("/api/login")
+@RestController  // Cambiar a RestController para manejar respuestas JSON
 public class LoginController {
 
     @Autowired
-    private IAdministradorServicio administradorServicio;
+    private AdministradorServicio administradorServicio;
 
-    @PostMapping
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        Optional<Administradores> admin = administradorServicio.login(loginRequest.getCorreo(), loginRequest.getContrasena());
+    // Página de login (si necesitas devolver una vista HTML, este método debería estar en un controlador diferente)
+    
 
-        if (admin.isPresent()) {
-            return ResponseEntity.ok(admin.get());
-        } else {
-            return ResponseEntity.status(401).body("Credenciales inválidas");
-        }
-    }
+    // Lógica para manejar el inicio de sesión
+    @PostMapping("/login")  // Asegúrate de que la ruta esté correctamente mapeada
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        String correo = loginRequest.getCorreo();
+        String contrasena = loginRequest.getContrasena();
 
-    // DTO para el cuerpo de la solicitud de login
-    public static class LoginRequest {
-        private String correo;
-        private String contrasena;
+        System.out.println("Correo: " + correo);
+        System.out.println("Contraseña: " + contrasena);
+        // Autenticar al administrador usando correo y contraseña
+        Optional<Administradores> administrador = administradorServicio.login(correo, contrasena);
 
-        public String getCorreo() {
-            return correo;
-        }
-
-        public void setCorreo(String correo) {
-            this.correo = correo;
+        // Si el usuario no existe, devolver error
+        if (!administrador.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid credentials");
         }
 
-        public String getContrasena() {
-            return contrasena;
-        }
-
-        public void setContrasena(String contrasena) {
-            this.contrasena = contrasena;
-        }
+        // Redirigir o devolver respuesta exitosa
+        return ResponseEntity.ok("Login successful");
     }
 }

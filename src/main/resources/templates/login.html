@@ -53,43 +53,45 @@
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function (event) {
-      event.preventDefault(); // Prevent form from submitting the traditional way
+  event.preventDefault(); // Prevent form from submitting the traditional way
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
 
-      // Prepare the payload for the API request
-      const loginData = {
-        correo: email,
-        contrasena: password
-      };
+  // Prepare the payload for the API request
+  const loginData = {
+    correo: email,
+    contrasena: password
+  };
 
-      try {
-        // Send the POST request to the API
-        const response = await fetch('http://localhost:8080/api/login', {  // Cambia la URL si es necesario
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(loginData)
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          // Handle successful login (e.g., redirect to another page)
-          alert('Login successful');
-          // Redirigir a otra página, por ejemplo
-          window.location.href = '/dashboard';
-        } else {
-          // Handle errors (e.g., invalid credentials)
-          const errorMessage = await response.text();
-          alert(`Error: ${errorMessage}`);
-        }
-      } catch (error) {
-        console.error('Error during login:', error);
-        alert('An error occurred during login. Please try again.');
-      }
+  try {
+    // Send the POST request to the API
+    const response = await fetch('http://localhost:8080/login', {  // Cambia la URL si es necesario
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(loginData)
     });
+
+    if (response.ok) {
+      // Usar response.text() en vez de response.json() si es texto plano
+      const data = await response.text(); // En lugar de .json(), usamos .text()
+      alert(data);  // Muestra el mensaje que devuelve el servidor
+      // Redirigir a otra página, por ejemplo
+      window.location.href = '/dashboard';
+    } else {
+      // Si la respuesta no es ok, manejar el error
+      const errorMessage = await response.text();
+      alert(`Error: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    alert('An error occurred during login. Please try again.');
+  }
+});
+
+
   </script>
 </body>
 </html>

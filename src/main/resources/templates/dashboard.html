@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="w-full bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between">
+            <div>
+                <a href="/dashboard" class="font-bold text-xl">Dashboard</a>
+            </div>
+            <div>
+                <a href="/sensores" class="mx-4">Sensores</a>
+                <a href="/datos" class="mx-4">Datos</a>
+                <a href="/administradores" class="mx-4">Administradores</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Saludo -->
+    <div class="container mx-auto p-6 mt-6">
+        <h1 class="text-3xl font-semibold text-gray-800">Welcome, <span class="text-blue-600">{{userName}}</span>!</h1>
+    </div>
+
+</body>
+</html>
