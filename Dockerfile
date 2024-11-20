@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiar el archivo JAR a la imagen
-COPY target/iniciador.jar app.jar
+COPY iniciador.jar app.jar
 
 # Exponer el puerto 8080
 EXPOSE 8080
