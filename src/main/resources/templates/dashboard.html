@@ -6,26 +6,70 @@
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex flex-col items-center min-h-screen">
+<body class="bg-gradient-to-tl from-tarawera-800 to-tarawera-500 flex flex-col min-h-screen">
 
     <!-- Navbar -->
-    <nav class="w-full bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <div>
-                <a href="/dashboard" class="font-bold text-xl">Dashboard</a>
-            </div>
-            <div>
-                <a href="/sensores" class="mx-4">Sensores</a>
-                <a href="/datos" class="mx-4">Datos</a>
-                <a href="/administradores" class="mx-4">Administradores</a>
-            </div>
+    <nav class="w-full bg-cyan-700 p-4 shadow-xl">
+        <div class="flex items-center justify-center text-2xl">
+            <a th:href="@{/}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">INICIO</a>
+            <a th:href="@{/administradores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">ADMIN</a>
+            <a th:href="@{/sensores}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">SENSORES</a>
+            <a th:href="@{/datos}" class="self-center bg-rose-700 rounded-2xl text-white shadow-xl hover:shadow-white/70 hover:bg-rose-600 focus:bg-green-600 focus:shadow-white/70 p-4 font-Russo font-bold mx-8">DATOS</a>
         </div>
     </nav>
 
     <!-- Saludo -->
-    <div class="container mx-auto p-6 mt-6">
-        <h1 class="text-3xl font-semibold text-gray-800">Welcome, <span class="text-blue-600">{{userName}}</span>!</h1>
+    <div class="bg-gradient-to-tl from-tarawera-800 to-tarawera-500 mx-10 rounded-2xl p-5 my-5 text-center">
+        <h1 class="text-4xl font-Russo text-white">Welcome, <span class="text-green-400">{{userName}}</span>!</h1>
     </div>
 
+    <!-- Listado de Elementos -->
+    <div class="bg-gradient-to-tl from-tarawera-800 to-tarawera-500 mx-10 rounded-2xl p-5 my-5 grid grid-cols-3 gap-6">
+
+        <!-- Sección de Administradores -->
+        <div class="bg-white p-4 rounded-xl shadow-inner shadow-black/80">
+            <h2 class="text-2xl font-Russo mb-4">Administradores</h2>
+            <ul class="space-y-2">
+                <!-- Lista de administradores -->
+                <li th:each="admin : ${administradores}" class="p-2 bg-gray-100 rounded-md shadow-sm">
+                    <span th:text="${admin.nombre}"></span> (<span th:text="${admin.correo}"></span>)
+                </li>
+            </ul>
+            <button class="mt-4 w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                th:onclick="|window.location.href='/administradores/agregar'|">
+                Agregar Administrador
+            </button>
+        </div>
+
+        <!-- Sección de Sensores -->
+        <div class="bg-white p-4 rounded-xl shadow-inner shadow-black/80">
+            <h2 class="text-2xl font-Russo mb-4">Sensores</h2>
+            <ul class="space-y-2">
+                <!-- Lista de sensores -->
+                <li th:each="sensor : ${sensores}" class="p-2 bg-gray-100 rounded-md shadow-sm">
+                    <span th:text="${sensor.modelo}"></span> - <span th:text="${sensor.ciudad}"></span>
+                </li>
+            </ul>
+            <button class="mt-4 w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                th:onclick="|window.location.href='/sensores/agregar'|">
+                Agregar Sensor
+            </button>
+        </div>
+
+        <!-- Sección de Datos -->
+        <div class="bg-white p-4 rounded-xl shadow-inner shadow-black/80">
+            <h2 class="text-2xl font-Russo mb-4">Datos</h2>
+            <ul class="space-y-2">
+                <!-- Lista de datos -->
+                <li th:each="dato : ${datos}" class="p-2 bg-gray-100 rounded-md shadow-sm">
+                    <span th:text="${dato.fechaRegistro}"></span> - <span th:text="${dato.contaminación}"></span> ppm
+                </li>
+            </ul>
+            <button class="mt-4 w-full bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                th:onclick="|window.location.href='/datos/agregar'|">
+                Agregar Dato
+            </button>
+        </div>
+    </div>
 </body>
 </html>

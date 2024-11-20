@@ -1,17 +1,27 @@
 package com.inventario.iniciador.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpSession;
-
+import com.inventario.iniciador.interfaceService.IAdministradorServicio;
+import com.inventario.iniciador.interfaceService.IDatosServicio;
+import com.inventario.iniciador.interfaceService.ISensoresServicio;
 
 @Controller
 @RequestMapping("/")
 public class mainController {
+
+    @Autowired
+    private IAdministradorServicio administradoresServicio;
+
+    @Autowired
+    private ISensoresServicio sensoresServicio;
+
+    @Autowired
+    private IDatosServicio datosServicio;
 
     @GetMapping
     public String index(Model model) {
@@ -21,21 +31,13 @@ public class mainController {
     }
 
     @GetMapping("/dashboard")
-    public String showDashboard(HttpSession session, Model model) {
-        // Obtener el nombre del usuario desde la sesión
-        String userName = (String) session.getAttribute("userName");
+    public String mostrarDashboard(Model model) {
+        // Agregar las listas de administradores, sensores y datos al modelo
+        model.addAttribute("administradores", administradoresServicio.listar());
+        model.addAttribute("sensores", sensoresServicio.listar());
+        model.addAttribute("datos", datosServicio.listar());
 
-        if (userName == null) {
-            // Si no hay usuario en la sesión, redirigir a login
-            return "redirect:/login";
-        }
-
-        
-
-        // Pasamos el nombre del usuario al modelo
-        model.addAttribute("userName", userName);
-
-        // Retornamos la vista dashboard.html
+        // Retornar la vista del dashboard
         return "dashboard";
     }
 
